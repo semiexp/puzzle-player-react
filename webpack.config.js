@@ -6,14 +6,20 @@ module.exports = {
       filename: 'bundle.js'
   },
   module: {
-    rules: [{
-      test: /\.js?$/,
-      exclude: /node_modules/,
-      loader: 'babel-loader',
-      query: {
-        plugins: ["transform-react-jsx"]
+    rules: [
+      {
+        test: /\.js?$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader',
+        query: {
+          plugins: ["transform-react-jsx"]
+        }
+      },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader']
       }
-    }]
+    ]
   },
   resolve: {
     extensions: ['.js'],

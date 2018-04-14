@@ -1,0 +1,24 @@
+.controller-button {
+    padding: 2px;
+    margin-left: 2px;
+    margin-right: 2px;
+    user-select: none;
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.controller-button-clicked {
+    border: solid 1px #cccccc;
+    background-color: #ffffff;
+}
+
+.controller-button-active {
+    border: solid 1px #cccccc;
+    background-color: #dddddd;
+}
+
+.controller-button-inactive {
+    border: solid 1px #dddddd;
+    background-color: #eeeeee;
+}

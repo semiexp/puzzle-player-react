@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import RichButton from 'controller/button'
+
 export default class Controller extends React.Component {
     constructor(props) {
         super(props);
@@ -9,7 +11,9 @@ export default class Controller extends React.Component {
     render() {
         return (
             <div>
-                Controller!
+                <RichButton onClick={() => console.log('clicked')}>
+                    button!
+                </RichButton>
             </div>
         );
     }
