@@ -1,8 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import Controller from 'controller/controller'
+import Toolbar from 'toolbar/toolbar'
 
-const App = () => <Controller />;
+import 'style.css'
+
+const App = () => <Toolbar />;
 
 ReactDOM.render(<App />, document.querySelector('#container'));

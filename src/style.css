@@ -1,4 +1,4 @@
-.controller-button {
+.toolbar-button {
     padding: 2px;
     margin-left: 2px;
     margin-right: 2px;
@@ -8,17 +8,25 @@
     vertical-align: middle;
 }
 
-.controller-button-clicked {
+.toolbar-button-clicked {
     border: solid 1px #cccccc;
     background-color: #ffffff;
 }
 
-.controller-button-active {
+.toolbar-button-active {
     border: solid 1px #cccccc;
     background-color: #dddddd;
 }
 
-.controller-button-inactive {
+.toolbar-button-inactive {
     border: solid 1px #dddddd;
     background-color: #eeeeee;
+}
+
+.toolbar-container {
+    border: solid 1px #888888;
+    margin-bottom: -1px;
+    background-color: #cccccc;
+    padding: 2px;
+    display: inline-block;
 }

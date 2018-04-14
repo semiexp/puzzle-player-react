@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import 'style.css'
+import Icon from 'toolbar/icon'
 
 export default class RichButton extends React.Component {
     constructor(props) {
@@ -34,13 +34,13 @@ export default class RichButton extends React.Component {
     }
 
     render() {
-        let className = "controller-button";
+        let className = "toolbar-button";
         if (this.state.click) {
-            className += " controller-button-clicked";
+            className += " toolbar-button-clicked";
         } else if (this.state.mouseOver) {
-            className += " controller-button-active";
+            className += " toolbar-button-active";
         } else {
-            className += " controller-button-inactive"
+            className += " toolbar-button-inactive"
         }
         return (
             <div
@@ -49,7 +49,8 @@ export default class RichButton extends React.Component {
                 onMouseUp={this.onMouseUp}
                 onMouseEnter={this.onMouseEnter}
                 onMouseLeave={this.onMouseLeave}>
-                {this.props.children}
+                {this.props.icon && <Icon type={this.props.icon} /> }
+                {!this.props.icon && this.props.children}
             </div>
         );
     }
