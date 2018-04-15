@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 
-import Icon from 'component/Icon'
+import Icon from 'components/Icon'
 
 export default class RichButton extends React.Component {
     constructor(props) {

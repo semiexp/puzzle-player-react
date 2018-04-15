@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import Player from 'component/Player'
+import Player from 'components/Player'
 
 import 'style.css'
 
