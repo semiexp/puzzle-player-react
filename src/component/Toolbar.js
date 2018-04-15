@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
 
 import RichButton from 'component/RichButton'
 
@@ -17,3 +18,7 @@ export default class Toolbar extends React.Component {
         );
     }
 }
+
+Toolbar.propTypes = {
+
+};

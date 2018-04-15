@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
 
 import Icon from 'component/Icon'
 
@@ -55,3 +56,9 @@ export default class RichButton extends React.Component {
         );
     }
 }
+
+RichButton.propTypes = {
+    icon: PropTypes.string,
+    onClick: PropTypes.func,
+    children: PropTypes.node
+};
