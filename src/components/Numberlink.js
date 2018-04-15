@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 
 import LineGridHandlingSVGContainer from 'components/LineGridHandlingSVGContainer'
+import SVGGrid from 'components/SVGGrid'
+
 import LineGrid from 'logic/LineGrid'
 
 export default class Numberlink extends React.Component {
@@ -20,6 +22,14 @@ export default class Numberlink extends React.Component {
                 segmentLength={20}
                 lineGrid={lineGrid}
                 onChange={() => {}}>
+                <SVGGrid
+                    offsetX={2}
+                    offsetY={2}
+                    rowCount={lineGrid.height}
+                    columnCount={lineGrid.width}
+                    lineWidth={3}
+                    cellSize={20}
+                    />
             </LineGridHandlingSVGContainer>
         );
     }
