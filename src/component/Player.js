@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import Toolbar from 'toolbar/toolbar'
+import Toolbar from 'component/Toolbar'
 
 export default class Player extends React.Component {
     constructor(props) {

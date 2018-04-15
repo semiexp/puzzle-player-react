@@ -1,8 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import RichButton from 'toolbar/button'
-import Icon from 'toolbar/icon'
+import RichButton from 'component/RichButton'
 
 export default class Toolbar extends React.Component {
     constructor(props) {
