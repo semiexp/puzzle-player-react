@@ -18,17 +18,17 @@ export default class Numberlink extends React.Component {
         return (
             <LineGridHandlingSVGContainer
                 margin={2}
-                segmentWidth={3}
-                segmentLength={20}
+                gridLineWidth={3}
+                cellSize={40}
                 lineGrid={lineGrid}
-                onChange={() => {}}>
+                onChange={(x, y, s) => { console.log(x, y, s) }}>
                 <SVGGrid
                     offsetX={2}
                     offsetY={2}
                     rowCount={lineGrid.height}
                     columnCount={lineGrid.width}
                     lineWidth={3}
-                    cellSize={20}
+                    cellSize={40}
                     />
             </LineGridHandlingSVGContainer>
         );
