@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import Toolbar from 'toolbar/toolbar'
+import Player from 'component/Player'
 
 import 'style.css'
 
-const App = () => <Toolbar />;
+const App = () => <Player />;
 
 ReactDOM.render(<App />, document.querySelector('#container'));
