@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 
 import Toolbar from 'components/Toolbar'
+import Numberlink from 'components/Numberlink'
 
 export default class Player extends React.Component {
     constructor(props) {
@@ -15,9 +16,7 @@ export default class Player extends React.Component {
                 <div className='puzzle-container'>
                     <Toolbar />
 
-                    <div>
-                        Puzzle contents here
-                    </div>
+                    <Numberlink />
                 </div>
             </div>
         );
