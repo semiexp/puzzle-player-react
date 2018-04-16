@@ -39,8 +39,6 @@ export default function SVGLineGrid(props) {
         }
     }
 
-    console.log(blankCenter);
-
     return (<g>
         <SVGGrid
             offsetX={offsetX}
@@ -75,7 +73,7 @@ export default function SVGLineGrid(props) {
         {
             blankCenter.map((p) => [
                 <line x1={p.x - blankXSize} y1={p.y - blankXSize} x2={p.x + blankXSize} y2={p.y + blankXSize} key={p.x + "," + p.y + "a"} />,
-                <line x1={p.x + blankXSize} y1={p.y - blankXSize} x2={p.x - blankXSize} y2={p.y + blankXSize} key={p.x + "," + p.y + "a"} />,
+                <line x1={p.x + blankXSize} y1={p.y - blankXSize} x2={p.x - blankXSize} y2={p.y + blankXSize} key={p.x + "," + p.y + "b"} />,
             ])
         }
         </g>
