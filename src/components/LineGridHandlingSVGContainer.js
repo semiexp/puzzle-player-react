@@ -123,6 +123,43 @@ export default class LineGridHandlingSVGContainer extends React.Component {
     }
     onMouseUp(e) {
         if (this.state.clickStatus == LEFT_CLICKING) {
+            const { cellSize, gridLineWidth, lineGrid, onChange } = this.props;
+            const { totalMoveDistance } = this.state;
+
+            const pos = mouseCoord(e);
+            const cellCoord = this.getCellCoord(pos);
+
+            if (totalMoveDistance < cellSize / 6) {
+                // clicking, not dragging
+                if (cellCoord.x >= 0) {
+                    const xr = cellCoord.xr - gridLineWidth;
+                    const yr = cellCoord.yr - gridLineWidth;
+                    const manhattanDistanceThreshold = cellSize * 0.35;
+
+                    let x = -1, y = -1;
+
+                    if (Math.abs(xr - cellSize / 2) + Math.abs(yr - 0) <= manhattanDistanceThreshold) {
+                        x = cellCoord.x * 2;
+                        y = cellCoord.y * 2 - 1;
+                    } else if (Math.abs(xr - 0) + Math.abs(yr - cellSize / 2) <= manhattanDistanceThreshold) {
+                        x = cellCoord.x * 2 - 1;
+                        y = cellCoord.y * 2;
+                    } else if (Math.abs(xr - cellSize / 2) + Math.abs(yr - (cellSize - 1)) <= manhattanDistanceThreshold) {
+                        x = cellCoord.x * 2;
+                        y = cellCoord.y * 2 + 1;
+                    } else if (Math.abs(xr - (cellSize - 1)) + Math.abs(yr - cellSize / 2) <= manhattanDistanceThreshold) {
+                        x = cellCoord.x * 2 + 1;
+                        y = cellCoord.y * 2;
+                    }
+
+                    if (x >= 0 && y >= 0 && x < 2 * lineGrid.width - 1 && y < 2 * lineGrid.height - 1) {
+                        const currentSegmentState = lineGrid.getSegment(x, y);
+                        const nextSegmentState = currentSegmentState == LineGrid.UNDECIDED ? LineGrid.BLANK : LineGrid.UNDECIDED;
+
+                        onChange(x, y, nextSegmentState);
+                    }
+                }
+            }
             this.setState({
                 clickStatus: NOT_CLICKING,
                 totalMoveDistance: 0,

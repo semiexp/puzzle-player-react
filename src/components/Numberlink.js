@@ -41,6 +41,7 @@ export default class Numberlink extends React.Component {
                     answerLineWidth={5}
                     cellSize={40}
                     lineGrid={lineGrid}
+                    blankXSize={5}
                     />
             </LineGridHandlingSVGContainer>
         );
