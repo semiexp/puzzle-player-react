@@ -18,6 +18,10 @@ export default class LineGrid {
     getSegment(x, y) {
         return this._data[y][x];
     }
+    setSegment(x, y, s) {
+        this._data[y][x] = s;
+        return this;
+    }
 }
 
 LineGrid.UNDECIDED = 0;

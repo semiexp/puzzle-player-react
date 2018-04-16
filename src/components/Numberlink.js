@@ -3,32 +3,44 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 
 import LineGridHandlingSVGContainer from 'components/LineGridHandlingSVGContainer'
-import SVGGrid from 'components/SVGGrid'
+import SVGLineGrid from 'components/SVGLineGrid'
 
 import LineGrid from 'logic/LineGrid'
 
 export default class Numberlink extends React.Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            lineGrid: new LineGrid()
+        }
+
+        this.onChange = this.onChange.bind(this);
+    }
+
+    onChange(x, y, s) {
+        this.setState( {
+            lineGrid: this.state.lineGrid.setSegment(x, y, s)
+        });
     }
 
     render() {
-        const lineGrid = new LineGrid();
+        const { lineGrid } = this.state;
 
         return (
             <LineGridHandlingSVGContainer
                 margin={2}
-                gridLineWidth={3}
+                gridLineWidth={1}
                 cellSize={40}
                 lineGrid={lineGrid}
-                onChange={(x, y, s) => { console.log(x, y, s) }}>
-                <SVGGrid
+                onChange={this.onChange}>
+                <SVGLineGrid   
                     offsetX={2}
                     offsetY={2}
-                    rowCount={lineGrid.height}
-                    columnCount={lineGrid.width}
-                    lineWidth={3}
+                    gridLineWidth={1}
+                    answerLineWidth={5}
                     cellSize={40}
+                    lineGrid={lineGrid}
                     />
             </LineGridHandlingSVGContainer>
         );
