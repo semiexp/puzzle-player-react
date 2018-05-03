@@ -9,6 +9,8 @@ const LEFT_CLICKING = 1;
 const RIGHT_CLICKING = 2;
 const OUT_OF_FIELD = { x: -1, y: -1 };
 const ON_GRID_LINE = { x: -2, y: -2 };
+const TO_LINE = 0;
+const TO_UNDECIDED = 1;
 
 function mouseCoord(e) {
     const boundingRect = e.currentTarget.getBoundingClientRect();
@@ -28,7 +30,8 @@ export default class LineGridHandlingSVGContainer extends React.Component {
             lastMousePosition: { x: -1, y: -1 },
             lastCellCoord: OUT_OF_FIELD,
             lastDifferentCellCoord: OUT_OF_FIELD,
-            lastChangeApplied: false
+            lastChangeApplied: false,
+            changeMode: -1
         };
 
         this.onMouseDown = this.onMouseDown.bind(this);
@@ -72,7 +75,7 @@ export default class LineGridHandlingSVGContainer extends React.Component {
         if (this.state.clickStatus == LEFT_CLICKING) {
             const { gridLineWidth, cellSize, lineGrid, onChange } = this.props;
             const { lastCellCoord, lastMousePosition } = this.state;
-            let { lastDifferentCellCoord, lastChangeApplied } = this.state;
+            let { lastDifferentCellCoord, lastChangeApplied, changeMode } = this.state;
 
             const pos = mouseCoord(e);
             const cellCoord = this.getCellCoord(pos);
@@ -104,8 +107,18 @@ export default class LineGridHandlingSVGContainer extends React.Component {
                     const x = lastDifferentCellCoord.x + cellCoord.x;
                     const y = lastDifferentCellCoord.y + cellCoord.y;
 
-                    if (lineGrid.getSegment(x, y) != LineGrid.LINE) {
-                        onChange(x, y, LineGrid.LINE);
+                    if (changeMode == -1) {
+                        changeMode = (lineGrid.getSegment(x, y) != LineGrid.LINE) ? TO_LINE : TO_UNDECIDED;
+                    }
+
+                    if (changeMode == TO_LINE) {
+                        if (lineGrid.getSegment(x, y) != LineGrid.LINE) {
+                            onChange(x, y, LineGrid.LINE);
+                        }
+                    } else {
+                        if (lineGrid.getSegment(x, y) != LineGrid.UNDECIDED) {
+                            onChange(x, y, LineGrid.UNDECIDED);
+                        }
                     }
                 }
             }
@@ -113,11 +126,12 @@ export default class LineGridHandlingSVGContainer extends React.Component {
             const totalMoveDistance = this.state.totalMoveDistance + Math.abs(lastMousePosition.x - pos.x) + Math.abs(lastMousePosition.y - pos.y);
 
             this.setState({
-                totalMoveDistance: totalMoveDistance,
+                totalMoveDistance,
                 lastMousePosition: pos,
                 lastCellCoord: cellCoord === ON_GRID_LINE ? lastCellCoord : { x: cellCoord.x, y: cellCoord.y },
-                lastDifferentCellCoord: lastDifferentCellCoord,
-                lastChangeApplied: lastChangeApplied
+                lastDifferentCellCoord,
+                lastChangeApplied,
+                changeMode
             });
         }
     }
@@ -166,7 +180,8 @@ export default class LineGridHandlingSVGContainer extends React.Component {
                 lastMousePosition: { x: -1, y: -1 },
                 lastCellCoord: OUT_OF_FIELD,
                 lastDifferentCellCoord: OUT_OF_FIELD,
-                lastChangeApplied: false
+                lastChangeApplied: false,
+                changeMode: -1
             });
         }
     }
