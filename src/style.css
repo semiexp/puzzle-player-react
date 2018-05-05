@@ -40,3 +40,12 @@
     display: inline-block;
     border: solid 1px #444444;
 }
+
+.puzzle-text {
+    cursor: default;
+    -ms-user-select: none;
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
