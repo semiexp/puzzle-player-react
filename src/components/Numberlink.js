@@ -17,6 +17,9 @@ export default class Numberlink extends React.Component {
         }
 
         this.state.field.setClue(0, 0, 1);
+        this.state.field.setClue(0, 2, 1);
+        this.state.field.setClue(2, 0, 2);
+        this.state.field.setClue(2, 2, 2);
 
         this.onChange = this.onChange.bind(this);
     }
@@ -34,6 +37,8 @@ export default class Numberlink extends React.Component {
         const margin = 2;
         const gridLineWidth = 1;
         const cellSize = 40;
+        
+        if (field.checkAnswer()) console.log('ok!');
 
         return (
             <LineGridHandlingSVGContainer
