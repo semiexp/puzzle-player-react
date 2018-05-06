@@ -16,7 +16,7 @@ export default class LineGrid {
         return this._width;
     }
     getSegment(x, y) {
-        if (0 <= x && x < this.height * 2 - 1 && 0 <= y && y < this.width * 2 - 1) {
+        if (0 <= x && x < this.width * 2 - 1 && 0 <= y && y < this.height * 2 - 1) {
             return this._data[y][x];
         } else {
             return LineGrid.BLANK;
