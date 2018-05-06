@@ -1,12 +1,15 @@
 import LineGrid from 'logic/LineGrid'
 
 export default class NumberlinkField extends LineGrid {
-    constructor() {
-        super();
+    constructor(problem) {
+        super(problem.height, problem.width);
 
         this._clue = new Array(this.height);
         for (let y = 0; y < this.height; ++y) {
-            this._clue[y] = new Array(this.width).fill(NumberlinkField.NO_CLUE);
+            this._clue[y] = new Array(this.width);
+            for (let x = 0; x < this.width; ++x) {
+                this._clue[y][x] = problem.getClue(x, y);
+            }
         }
     }
 

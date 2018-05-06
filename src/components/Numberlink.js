@@ -7,19 +7,13 @@ import SVGLineGrid from 'components/SVGLineGrid'
 import SVGText from 'components/SVGText'
 
 import NumberlinkField from 'logic/NumberlinkField'
+import NumberlinkProblem from 'logic/NumberlinkProblem'
 
 export default class Numberlink extends React.Component {
     constructor(props) {
         super(props);
-
-        this.state = {
-            field: new NumberlinkField()
-        }
-
-        this.state.field.setClue(0, 0, 1);
-        this.state.field.setClue(0, 2, 1);
-        this.state.field.setClue(2, 0, 2);
-        this.state.field.setClue(2, 2, 2);
+        
+        this.state = { field: new NumberlinkField(props.problem) };
 
         this.onChange = this.onChange.bind(this);
     }
@@ -28,6 +22,12 @@ export default class Numberlink extends React.Component {
         this.setState( {
             field: this.state.field.setSegment(x, y, s)
         });
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (this.props.problem !== nextProps.problem) {
+            this.setState({ field: new NumberlinkField(nextProps.problem)});
+        }
     }
 
     render() {
@@ -72,5 +72,5 @@ export default class Numberlink extends React.Component {
 }
 
 Numberlink.propTypes = {
-
+    problem: PropTypes.instanceOf(NumberlinkProblem)
 }

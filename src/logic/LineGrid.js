@@ -1,11 +1,11 @@
 export default class LineGrid {
-    constructor() {
-        this._height = 3;
-        this._width = 3;
-        this._data = new Array(this.height * 2 - 1);
+    constructor(height, width) {
+        this._height = height;
+        this._width = width;
+        this._data = new Array(height * 2 - 1);
 
-        for (let y = 0; y < this.height * 2 - 1; ++y) {
-            this._data[y] = new Array(this.width * 2 - 1).fill(LineGrid.UNDECIDED);
+        for (let y = 0; y < height * 2 - 1; ++y) {
+            this._data[y] = new Array(width * 2 - 1).fill(LineGrid.UNDECIDED);
         }
     }
 
