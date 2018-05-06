@@ -31,20 +31,25 @@ export default class NumberlinkField extends LineGrid {
     checkAnswer() {
         if (this.hasBranchingPoints()) return false;
 
+        let expectedLinesDoubled = 0;
+        let linesInChainsDoubled = 0;
+
         for (let y = 0; y < this.height; ++y) {
             for (let x = 0; x < this.width; ++x) {
                 let lines = this.countIncidentLines(x * 2, y * 2);
+                expectedLinesDoubled += lines;
                 if ((this.getClue(x, y) !== NumberlinkField.NO_CLUE) !== (lines === 1)) return false;
 
                 if (lines == 1) {
                     let traverseResult = this.traverse(x * 2, y * 2);
                     if (traverseResult.x === -1 || (traverseResult.x === x * 2 && traverseResult.y === y * 2)) return false;
                     if (this.getClue(x, y) === NumberlinkField.NO_CLUE || this.getClue(x, y) !== this.getClue(traverseResult.x / 2, traverseResult.y / 2)) return false;
+                    linesInChainsDoubled += traverseResult.length;
                 }
             }
         }
 
-        return true;
+        return expectedLinesDoubled === linesInChainsDoubled;
     }
 }
 
