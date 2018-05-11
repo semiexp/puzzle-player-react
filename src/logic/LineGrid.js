@@ -7,6 +7,9 @@ export default class LineGrid {
         for (let y = 0; y < height * 2 - 1; ++y) {
             this._data[y] = new Array(width * 2 - 1).fill(LineGrid.UNDECIDED);
         }
+
+        this._undoHistory = [];
+        this._redoHistory = [];
     }
 
     get height() {
@@ -22,8 +25,37 @@ export default class LineGrid {
             return LineGrid.BLANK;
         }
     }
-    setSegment(x, y, s) {
+    setSegment(x, y, s, updateHistory = true) {
+        if (updateHistory) {
+            this._redoHistory = [];
+            this._undoHistory.push({ x, y, state: this._data[y][x] });
+        }
         this._data[y][x] = s;
+        return this;
+    }
+
+    undo() {
+        if (this._undoHistory.length == 0) return this;
+
+        const { x, y, state } = this._undoHistory.pop();
+        this._redoHistory.push({ x, y, state: this._data[y][x] });
+        this._data[y][x] = state;
+        return this;
+    }
+    redo() {
+        if (this._redoHistory.length == 0) return this;
+
+        const { x, y, state } = this._redoHistory.pop();
+        this._undoHistory.push({ x, y, state: this._data[y][x] });
+        this._data[y][x] = state;
+        return this;
+    }
+    undoAll() {
+        while (this._undoHistory.length > 0) this.undo();
+        return this;
+    }
+    redoAll() {
+        while (this._redoHistory.length > 0) this.redo();
         return this;
     }
 
