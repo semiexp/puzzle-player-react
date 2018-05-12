@@ -6,10 +6,11 @@ import LineGridHandlingSVGContainer from 'components/LineGridHandlingSVGContaine
 import SVGLineGrid from 'components/SVGLineGrid'
 import SVGText from 'components/SVGText'
 
+import Puzzle from 'components/Puzzle'
 import NumberlinkField from 'logic/NumberlinkField'
 import NumberlinkProblem from 'logic/NumberlinkProblem'
 
-export default class Numberlink extends React.Component {
+export default class Numberlink extends Puzzle {
     constructor(props) {
         super(props);
         

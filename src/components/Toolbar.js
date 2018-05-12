@@ -10,15 +10,22 @@ export default class Toolbar extends React.Component {
     }
 
     render() {
+        const { onUndoAll, onUndo, onRedo, onRedoAll } = this.props;
+
         return (
             <div className="toolbar-container">
-                <RichButton onClick={() => console.log('clicked 1')} icon='left-triangle' />
-                <RichButton onClick={() => console.log('clicked 2')} icon='right-triangle' />
+                <RichButton onClick={onUndoAll || (() => {})} icon='double-left-triangle' />
+                <RichButton onClick={onUndo || (() => {})} icon='left-triangle' />
+                <RichButton onClick={onRedo || (() => {})} icon='right-triangle' />
+                <RichButton onClick={onRedoAll || (() => {})} icon='double-right-triangle' />
             </div>
         );
     }
 }
 
 Toolbar.propTypes = {
-
+    onUndoAll: PropTypes.func,
+    onUndo: PropTypes.func,
+    onRedo: PropTypes.func,
+    onRedoAll: PropTypes.func
 };

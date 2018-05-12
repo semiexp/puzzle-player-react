@@ -9,6 +9,7 @@ import NumberlinkProblem from 'logic/NumberlinkProblem'
 export default class Player extends React.Component {
     constructor(props) {
         super(props);
+        this.puzzleRef = React.createRef();
 
         this.state = { problem: new NumberlinkProblem(4, 3) };
         this.state.problem.setClue(0, 0, 1);
@@ -21,9 +22,13 @@ export default class Player extends React.Component {
         return (
             <div className='puzzle-container-wrapper'>
                 <div className='puzzle-container'>
-                    <Toolbar />
+                    <Toolbar
+                        onUndoAll={() => {this.puzzleRef.current.undoAll()}}
+                        onUndo={() => {this.puzzleRef.current.undo()}}
+                        onRedo={() => {this.puzzleRef.current.redo()}}
+                        onRedoAll={() => {this.puzzleRef.current.redoAll()}}/>
 
-                    <Numberlink problem={this.state.problem}/>
+                    <Numberlink problem={this.state.problem} ref={this.puzzleRef}/>
                 </div>
             </div>
         );
