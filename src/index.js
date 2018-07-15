@@ -5,6 +5,11 @@ import Player from 'components/Player'
 
 import 'style.css'
 
-const App = () => <Player />;
+function App() {
+    const useGenerator = document.querySelector('#container').getAttribute("useGenerator");
+    const player = <Player
+        generator={useGenerator && (() => { return window.generateProblem(); })} />;
+    return player;
+}
 
 ReactDOM.render(<App />, document.querySelector('#container'));

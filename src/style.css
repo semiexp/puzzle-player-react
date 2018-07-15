@@ -34,6 +34,7 @@
 .puzzle-container {
     display: flex;
     flex-direction: column;
+    background-color: #ffffff;
 }
 
 .puzzle-container-wrapper {
