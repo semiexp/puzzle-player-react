@@ -43,9 +43,9 @@ export default class LineGridHandlingSVGContainer extends React.Component {
         const { margin, gridLineWidth, cellSize, lineGrid } = this.props;
 
         const x = Math.floor((loc.x - margin) / (gridLineWidth + cellSize));
-        const xr = loc.x - (gridLineWidth + cellSize) * x;
+        const xr = loc.x - margin - (gridLineWidth + cellSize) * x;
         const y = Math.floor((loc.y - margin) / (gridLineWidth + cellSize));
-        const yr = loc.y - (gridLineWidth + cellSize) * y;
+        const yr = loc.y - margin - (gridLineWidth + cellSize) * y;
 
         if (x < 0 || y < 0 || x >= lineGrid.width || y >= lineGrid.height) {
             return OUT_OF_FIELD;
@@ -54,7 +54,7 @@ export default class LineGridHandlingSVGContainer extends React.Component {
             return ON_GRID_LINE;
         }
 
-        return {x: x, xr: xr, y: y, yr: yr};
+        return { x: x, xr: xr, y: y, yr: yr };
     }
     onMouseDown(e) {
         const pos = mouseCoord(e);
@@ -87,19 +87,19 @@ export default class LineGridHandlingSVGContainer extends React.Component {
 
             if (!lastChangeApplied && lastDifferentCellCoord.x >= 0 && cellCoord.x >= 0 && (lastDifferentCellCoord.x != cellCoord.x || lastDifferentCellCoord.y != cellCoord.y)) {
                 if (lastDifferentCellCoord.x == cellCoord.x && lastDifferentCellCoord.y == cellCoord.y - 1) {
-                    if (cellCoord.yr >= gridLineWidth + cellSize / 4) {
+                    if (cellCoord.yr >= gridLineWidth + cellSize / 8) {
                         lastChangeApplied = true;
                     }
                 } else if (lastDifferentCellCoord.x == cellCoord.x && lastDifferentCellCoord.y == cellCoord.y + 1) {
-                    if (cellCoord.yr < gridLineWidth + cellSize - cellSize / 4) {
+                    if (cellCoord.yr < gridLineWidth + cellSize - cellSize / 8) {
                         lastChangeApplied = true;
                     }
                 } else if (lastDifferentCellCoord.x == cellCoord.x - 1 && lastDifferentCellCoord.y == cellCoord.y) {
-                    if (cellCoord.xr >= gridLineWidth + cellSize / 4) {
+                    if (cellCoord.xr >= gridLineWidth + cellSize / 8) {
                         lastChangeApplied = true;
                     }
                 } else if (lastDifferentCellCoord.x == cellCoord.x + 1 && lastDifferentCellCoord.y == cellCoord.y) {
-                    if (cellCoord.xr < gridLineWidth + cellSize - cellSize / 4) {
+                    if (cellCoord.xr < gridLineWidth + cellSize - cellSize / 8) {
                         lastChangeApplied = true;
                     }
                 }
@@ -194,7 +194,7 @@ export default class LineGridHandlingSVGContainer extends React.Component {
 
         const svgHeight = height || (2 * margin + cellSize * gridHeight + gridLineWidth * (gridHeight + 1));
         const svgWidth = width || (2 * margin + cellSize * gridWidth + gridLineWidth * (gridWidth + 1));
-        
+
         return (
             <svg
                 height={svgHeight}
